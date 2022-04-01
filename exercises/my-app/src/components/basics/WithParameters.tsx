@@ -1,12 +1,12 @@
 export default function ComParametro(props: any) {
-    const status: string = props.nota >= 7 ? 'Aprovado' : 'Recuperação'
+    const status: string = props.grade >= 7 ? 'Aprovado' : 'Recuperação'
     return (
         <div>
-            <h2>{ props.titulo }</h2>
+            <h2>{ props.title }</h2>
             <p>
-                <strong>{ props.aluno } </strong>
+                <strong>{ props.student } </strong>
                 tem nota
-                <strong> { props.nota } </strong>
+                <strong> { props.grade } </strong>
                 <br/> status: 
                 <strong> { status }</strong>!
             </p>
