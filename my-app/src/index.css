@@ -1,0 +1,14 @@
+body { 
+    background-color: rgba(0, 0, 0, 0.936);
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+h1, h2, h3 {
+    font-weight: 300;
+}
+
+h2, h3 {
+    margin: 0;
+}
