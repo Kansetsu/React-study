@@ -10,7 +10,10 @@ import StudentList from './components/loop/StudentList'
 import ProductsTable from './components/loop/ProductsTable'
 import EvenOrOdd from './components/conditional/EvenOrOdd'
 import UserInfo from './components/conditional/UserInfo'
-
+import DirectFather from './components/comunication/DirectFather'
+import IndirectFather from './components/comunication/IndirectFather'
+import Input from './components/form/Input'
+import Mega from './components/mega/Mega'
 
 export default function App() {
     return (
@@ -36,9 +39,13 @@ export default function App() {
 
                 <Cards title='#08 Renderização Condicional' color={'#157'}>
                     <EvenOrOdd number={2} />
-                    <UserInfo user={{name: 'Fernando'}}/>
-                    <UserInfo /> 
+                    <UserInfo user={{ name: 'Fernando' }} />
+                    <UserInfo />
                 </Cards>
+                <Cards title='#09 Comunicação Direta' color={'#999'}><DirectFather /></Cards>
+                <Cards title='#10 Comunicação Indireta' color={'#997'}><IndirectFather /></Cards>
+                <Cards title='#11 Componente Controlado (Input)' color={'#555'}><Input /></Cards>
+                <Cards title='#13 Mega Sena' color={'#3624'}><Mega qtd={6}/></Cards>
             </div>
         </div>
     )
