@@ -25,10 +25,10 @@ const UseEffect = (props: any) => {
     const [status, setStatus] = useState("Ímpar")
 
     useEffect(function () {
-        setStatus(number % 2 === 0 ? "Par" : "Ímpar")
-
+        setStatus(number % 2 === 0 ? "Par" : "Ímpar")        
     }, [number])
 
+    console.log('dsauhduase')
     return (
         <div className="UseEffect">
             <PageTitle title="Hook UseEffect" subtitle="Permite executar efeitos colaterais em componentes funcionais!" />
