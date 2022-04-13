@@ -132,3 +132,6 @@ export const useFetch = (url: any, method: any = 'get') => {
     return response
 } 
 ```
+### Contato e Ajuda
+
+Caso queira entrar em contato ou verificar mais informações sobre o repositório veja no [github](https://github.com/Vinicius-AndradeM/React-study).
