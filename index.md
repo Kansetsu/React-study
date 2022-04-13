@@ -1,37 +1,121 @@
-## Welcome to GitHub Pages
+## Este repositório tem como propósta guardar exemplos dos fundamentos do React com alguns exercícios e projetos
 
-You can use the [editor on GitHub](https://github.com/Vinicius-AndradeM/React-study/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Aqui você vai encontrar exercícios sobre as bases do React, utilização de determinados padrões, hooks, redux e alguns projetos práticos. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Componentes baseados em classe
 
-### Markdown
+Aqui você vai ter exemplos de componentes baseados em classe, utilização de estados do componente e a modularização de um projeto com esse padrão.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+```javascript
+export default class Calculator extends Component {
 
-```markdown
-Syntax highlighted code block
+    state = { ...initialState }
 
-# Header 1
-## Header 2
-### Header 3
+    constructor(props: any) {
+        super(props)
+        this.clearMemory = this.clearMemory.bind(this)
+        this.setOperation = this.setOperation.bind(this)
+        this.addDigit = this.addDigit.bind(this)
+    }
 
-- Bulleted
-- List
+    clearMemory() {
+        this.setState({ ...initialState })
+    }
 
-1. Numbered
-2. List
+    setOperation(operation: any) {
+        if (this.state.current === 0) {
+            this.setState({ operation, current: 1, clearDisplay: true })
+        } else {
+            const equals = operation === '='
+            const currentOperation = this.state.operation
 
-**Bold** and _Italic_ and `Code` text
+            const values = [...this.state.values]
+            try {
+                values[0] = eval(`${values[0]} ${currentOperation} ${values[1]}`)
+            } catch (error) {
+                values[0] = this.state.values[0]
+            }
+            values[1] = 0
 
-[Link](url) and ![Image](src)
+            this.setState({
+                displayValue: values[0],
+                operation: equals ? null : operation,
+                current: equals ? 0 : 1,
+                clearDisplay: !equals,
+                values
+            })
+        }
+
+    }
+
+    addDigit(n: any) {
+        if (n === '.' && this.state.displayValue.includes('.')) {
+            return
+        }
+
+        const clearDisplay = this.state.displayValue === '0' || this.state.clearDisplay
+        const currentValue = clearDisplay ? '' : this.state.displayValue
+        const displayValue = currentValue + n
+        this.setState({ displayValue, clearDisplay: false })
+
+        if (n !== '.') {
+            const i = this.state.current
+            const newValue = parseFloat(displayValue)
+            const values = [...this.state.values]
+            values[i] = newValue
+            this.setState({ values })
+        }
+    }
+
+    render() {
+        return (
+            <div className="calculator">
+                <Display value={this.state.displayValue}></Display>
+                <Button label='AC' click={this.clearMemory} triple />
+                <Button label='/' click={this.setOperation} operation />
+                <Button label='7' click={this.addDigit} />
+                <Button label='8' click={this.addDigit} />
+                <Button label='9' click={this.addDigit} />
+                <Button label='*' click={this.setOperation} operation />
+                <Button label='4' click={this.addDigit} />
+                <Button label='5' click={this.addDigit} />
+                <Button label='6' click={this.addDigit} />
+                <Button label='-' click={this.setOperation} operation />
+                <Button label='1' click={this.addDigit} />
+                <Button label='2' click={this.addDigit} />
+                <Button label='3' click={this.addDigit} />
+                <Button label='+' click={this.setOperation} operation />
+                <Button label='0' click={this.addDigit} double />
+                <Button label='.' click={this.addDigit} />
+                <Button label='=' click={this.setOperation} operation />
+            </div>
+        )
+    }
+}
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Vinicius-AndradeM/React-study/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### Componentes funcionais
 
-### Support or Contact
+Também tem vários exemplos de componentes funcionais, já que o javascript e o typescript são fortemente baseados em funções. Exemplos na prática de componentes funcionais, aplicações com hooks e vários outros exemplos bastante interessantes, até mesmo a criação de seus próprios hooks. 
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+```javascript
+import { useEffect, useState } from "react"
+
+export const useFetch = (url: any, method: any = 'get') => {
+    const [response, setResponse] = useState({
+        data: null,
+        loading: true
+    })
+
+    useEffect(function () {
+        fetch(url, { method }).then(resp => resp.json()).then(json => setResponse({
+            data: json,
+            loading: false
+        }))
+    }, [url, method])
+
+    return response
+} 
+```
