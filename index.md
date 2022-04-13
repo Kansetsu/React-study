@@ -7,6 +7,19 @@ Aqui você vai encontrar exercícios sobre as bases do React, utilização de de
 Aqui você vai ter exemplos de componentes baseados em classe, utilização de estados do componente e a modularização de um projeto com esse padrão.
 
 ```javascript
+import { Component } from "react";
+import './Calculator.css'
+import Button from "../components/Button";
+import Display from '../components/Display'
+
+const initialState = {
+    displayValue: '0',
+    clearDisplay: false,
+    operation: null,
+    values: [0, 0],
+    current: 0
+}
+
 export default class Calculator extends Component {
 
     state = { ...initialState }
