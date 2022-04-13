@@ -11,6 +11,6 @@ export const useCounter = (initialValue: any = 100) => {
         setCount(count - 1)
     }
 
-    return { inc, dec }
+    return  [count, inc, dec ]
 
 }
